@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:aop="http://www.springframework.org/schema/aop" 
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<bean id="stdBean" class="com.ashsoft.beans.Student">
+		<property name="sname" value="Ashish"/>
+		<property name="squal" value="MBBS"/>
+		<property name="semail" value="ash@ashsoft.com"/>
+		<property name="smobile" value="91-9988775566"/>
+	</bean>
+	
+	<!-- Target -->
+	<bean id="target" class="com.ashsoft.service.InstituteServiceImpl"/>
+	
+	<!-- Advice -->
+	<bean id="thanqAdvice" class="com.ashsoft.advice.ThanqAdvice"/>
+	
+	<!-- Proxy -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="target"/>
+		<property name="interceptorNames">
+			<list>
+				<value>thanqAdvice</value>
+			</list>
+		</property>
+	</bean>
+</beans>
