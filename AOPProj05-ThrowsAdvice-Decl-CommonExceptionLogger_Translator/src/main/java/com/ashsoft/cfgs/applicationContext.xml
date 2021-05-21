@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<!-- cfg Target class as Spring bean -->
+	<bean id="store"  class="com.ashsoft.service.ShoppingStore"/>
+	
+	<!-- cfg advice class -->
+	<bean id="expLogger_Grapher" class="com.ashsoft.advice.CommonExceptionGrapher_Logger"/>
+	
+	<!-- Enable aspectJ aop -->
+	<aop:config>
+		<aop:pointcut expression="execution(double com.ashsoft.service.ShoppingStore.calcBillAmount(..))" id="ptc"/>
+		<aop:aspect ref="expLogger_Grapher">
+			<aop:after-throwing method="exceptionLogger" pointcut-ref="ptc" throwing="iae"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
