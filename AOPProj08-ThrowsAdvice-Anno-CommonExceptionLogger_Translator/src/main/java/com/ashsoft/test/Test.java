@@ -9,7 +9,6 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		//Create IOC 
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("/com/ashsoft/cfgs/applicationContext.xml");
 		
 		//get Proxy class object
